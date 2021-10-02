@@ -230,6 +230,61 @@
                 display: none;
             }
         }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            padding: 20px;
+            grid-gap: 40px;
+            font-family: 'Source Serif Pro', serif;
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.18);
+            width: 400px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .container img {
+            width: 100%;
+            display: block;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .container:after {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 20px 20px 0 0;
+            opacity: 0.7;
+        }
+
+        .details {
+            padding: 20px 10px;
+            display: grid;
+            place-items: center;
+        }
+
+        .details>h3 {
+            color: black;
+            font-weight: 600;
+            font-size: 25px;
+            margin: 10px 0 15px 0;
+        }
+
+        .details p {
+            color: #a0a0a0;
+            font-size: 10px;
+            line-height: 30px;
+            font-weight: 400;
+        }
     </style>
     <div class="sidebar">
         <div class="logo-details">
@@ -265,7 +320,32 @@
         </ul>
     </div>
     <section class="home-section">
-        <div class="text">Dashboard</div>
+        <div class="text">Help</div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="container">
+                    <img src="./img/helpline.png" alt="helpline">
+                </div>
+                <div class="details">
+                    <h3>Help line number</h3>
+                    <p style="font-size: 20px;"><a style="text-decoration: none;" href="0808 800 0004">0808 800 0004</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="container">
+                    <img src="./img/hospital.png" alt="hospital">
+                </div>
+                <div class="details">
+                    <h3>Hospital</h3>
+                    <p style="font-size: 20px;"><a style="text-decoration: none;" href="#">Find Hospital near me</a>
+                    </p>
+                </div>
+            </div>
+
     </section>
     <script>
         let sidebar = document.querySelector(".sidebar");
