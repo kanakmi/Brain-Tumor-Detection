@@ -407,26 +407,20 @@
 
 
 
-        <div class="container">
         {% for i in data %}
+        <div class="container">
             <div class="wrapper">
                 <div class="card">
                     <div class="card-thumb">
                         <img src="/media/{{ i.image }}" class="client-img" alt="">
                     </div>
                     <div class="card-body">
-                        <p class="review">Chances of getting {{ i.symptom }}: {{ i.probability }}</p>
-                        <p class="review">Prevention methods: </p>
-                        <div class="rating">
-                            <img src="/media/files/star-fill.png" class="star" alt="">
-                            <img src="/media/files/star-fill.png" class="star" alt="">
-                            <img src="/media/files/star-fill.png" class="star" alt="">
-                            <img src="/media/files/star-fill.png" class="star" alt="">
-                            <img src="/media/files/star-no-fill.png" class="star" alt="">
-                        </div>
+                        <p class="review">Chances of {{ i.symptom }}: {{ i.probability }}</p>
+                        <p class="review"></p>
                     </div>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </section>
     <script>

@@ -4,7 +4,7 @@ from sendgrid.helpers.mail import Mail
 
 def send_mail(to,typ,probability):
     message = Mail(
-        from_email='from_email@example.com',
+        from_email='result.tumor.detection@mail.com',
         to_emails=to,
         subject='Your Report',
         html_content='Our AI asses your report and found <strong>'+str(typ)+'</strong> with probability of '+str(probability))

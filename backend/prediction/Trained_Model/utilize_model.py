@@ -2,28 +2,30 @@ import numpy as np
 import cv2
 import tensorflow as tf
 from tensorflow.keras import backend as K
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent
 
 '''
 Loading the Classifier Model from the disk
 '''
-with open('classifier_model.json', 'r') as json_file:
+with open(BASE_DIR/'classifier_model.json', 'r') as json_file:
     json_savedModel = json_file.read()
 
 # load the model architecture
 model = tf.keras.models.model_from_json(json_savedModel)
-model.load_weights('classifier_weights.h5')
+model.load_weights(BASE_DIR/'classifier_weights.h5')
 opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
 model.compile(optimizer=opt,loss="categorical_crossentropy", metrics=["accuracy"])
 
 '''
 Loading the Localization Model from the disk
 '''
-with open('localization_model.json', 'r') as json_file:
+with open(BASE_DIR/'localization_model.json', 'r') as json_file:
     json_savedModel= json_file.read()
 
 # load the model architecture 
 localize_model = tf.keras.models.model_from_json(json_savedModel)
-localize_model.load_weights('localization_weights.h5')
+localize_model.load_weights(BASE_DIR/'localization_weights.h5')
 localize_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 '''
@@ -42,7 +44,7 @@ def identify_tumor(file_path):
     labels = {0: 'No Tumor', 1: 'Tumor'}
     result = {
         'class': labels[predicted],
-        'probablity': float(round(probablity*100, 2))
+        'probablity': probablity
     }
 
     if predicted==1:

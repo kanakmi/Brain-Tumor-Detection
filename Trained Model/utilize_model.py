@@ -42,7 +42,7 @@ def identify_tumor(file_path):
     labels = {0: 'No Tumor', 1: 'Tumor'}
     result = {
         'class': labels[predicted],
-        'probablity': float(round(probablity*100, 2))
+        'probablity': probablity
     }
 
     if predicted==1:

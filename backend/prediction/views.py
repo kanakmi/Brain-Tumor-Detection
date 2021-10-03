@@ -1,17 +1,18 @@
 from django.shortcuts import render,redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from numpy import datetime64
 from .models import model_image
 from django.contrib.auth.decorators import login_required
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 from .Trained_Model.utilize_model import identify_tumor
 from .sendsms import send_mail
 
 @login_required
 def home(request):
     usr = request.user
-    data = model_image.objects.filter(user = usr)
+    data = model_image.objects.filter(user = usr).order_by('-id')
     context = {
         'data':data
     }
@@ -22,10 +23,10 @@ def test(request):
     if request.method=='POST':
         if request.FILES['myfile']:
             myfile = request.FILES['myfile']
-            fs = FileSystemStorage(location='UI/media/'+str(request.user))
+            fs = FileSystemStorage(location='media')
             filename = fs.save(myfile.name, myfile)
             usr = request.user
-            url = str(BASE_DIR)+'/media/'+str(request.user)+'/'+filename
+            url = str(BASE_DIR)+'\\media\\'+'\\'+filename
             res = identify_tumor(url)
             c=res['class']
             d = res['probablity']
@@ -34,10 +35,9 @@ def test(request):
             img.user = usr
             img.image = filename
             img.symptom = c
-            img.accuracy = d
-            img.image_url = url
+            img.probability = d
             img.save()
-            send_mail(usr.email,c,d)
+            #send_mail(usr.email,c,d)
             return redirect('dashboard')
     return render(request,"test.html")
 
