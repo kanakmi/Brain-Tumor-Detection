@@ -406,7 +406,7 @@
         <div class="text">Dashboard {{ user.first_name }}</div>
 
 
-
+        {% if data %}
         {% for i in data %}
         <div class="container">
             <div class="wrapper">
@@ -422,6 +422,7 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
     </section>
     <script>
         let sidebar = document.querySelector(".sidebar");

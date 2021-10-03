@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from numpy import datetime64
-from .models import model_image
+from .models import tumordata
 from django.contrib.auth.decorators import login_required
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,7 +12,7 @@ from .sendsms import send_mail
 @login_required
 def home(request):
     usr = request.user
-    data = model_image.objects.filter(user = usr).order_by('-id')
+    data = tumordata.objects.filter(user = usr).order_by('-id')
     context = {
         'data':data
     }
@@ -31,7 +31,7 @@ def test(request):
             c=res['class']
             d = res['probablity']
             print(c,d)
-            img = model_image()
+            img = tumordata()
             img.user = usr
             img.image = filename
             img.symptom = c
